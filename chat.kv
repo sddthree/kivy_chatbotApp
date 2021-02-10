@@ -1,0 +1,65 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+WindowManager:
+    transition: FadeTransition()
+    StartPage:
+        id: start
+        name: "Start"
+    ChatPage:
+        id: chat
+        name: "Chat"
+
+<StartPage>:
+    GridLayout:
+        cols: 1
+
+
+        Button:
+            id: start
+            background_color: (0,0,0,1)
+            text: "press anywhere to get start"
+            color: (0, 0, 0, 1)
+            on_press: app.root.current = "Chat"
+
+
+<ChatPage>:
+
+
+
+    GridLayout:
+        cols: 1
+        rows: 2
+
+        ScrollView:
+            id: history
+            size_hint_y: None
+
+            GridLayout:
+                id: scroll_layout
+                cols: 1
+                size_hint_y: None
+
+                Label:
+                    font_name: './HanyiSentyFoundation.ttf'
+                    id: chat_history
+                    size_hint_y: None
+                    markup: True
+
+                Label:
+                    id: scroll_to_point
+
+        GridLayout:
+            id: bottom_line
+            cols: 2
+
+            TextInput:
+                font_name: './HanyiSentyFoundation.ttf'
+                id: new_message
+                size_hint_x: None
+
+            Button:
+                id: send
+                text: "Send"
+                background_normal: ''
+                background_color: (0,0.6,0,1)
+                on_press: root.send_message()
+                on_release: root.receive_message()
